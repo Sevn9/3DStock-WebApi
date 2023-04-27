@@ -13,8 +13,6 @@ var app = builder.Build();
 
 Configure(app);
 
-//app.MapGet("/", () => "Hello World!");
-
 app.Run();
 
 void RegisterServices(IServiceCollection services)
@@ -41,11 +39,19 @@ void RegisterServices(IServiceCollection services)
       policy.AllowAnyOrigin();
     });
   });
-  
+ 
+  services.AddSwaggerGen(config =>
+  {
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    config.IncludeXmlComments(xmlPath);
+  });
+  services.AddSwaggerGen();
 
 }
 //настройка пайплайна(конвейера) указываем что будет использовать приложение здесь
 //сюда же подключается мидлваре
+
 
 void Configure(WebApplication app)
 {
@@ -53,7 +59,15 @@ void Configure(WebApplication app)
   {
     app.UseDeveloperExceptionPage();
   }
-
+  app.UseSwagger();
+  app.UseSwaggerUI(
+    config =>
+    {
+      config.RoutePrefix = string.Empty;
+      config.SwaggerEndpoint("swagger/v1/swagger.json", "Stock3D API");
+    }
+    );
+  
   using var scope = app.Services.CreateScope();
   //вызываем метод инициализации базы здесь
   var serviceProvider = scope.ServiceProvider;
@@ -66,6 +80,7 @@ void Configure(WebApplication app)
   app.UseRouting();
   app.UseHttpsRedirection();
   app.UseCors("AllowAll");
+
 
   app.UseEndpoints(endpoints =>
   {
