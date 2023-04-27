@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CE3AE0B5-FC95-42C5-BDB2-78BBDBE10125}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{541BF092-716E-4DBF-8DEA-AF62564E0771}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{CB89739A-43D1-4733-BBB6-6A8E162AC532}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.Domain", "Stock3D.Domain\Stock3D.Domain.csproj", "{28EA09EE-E839-48B6-802E-03BDD49BABAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.Application", "Stock3D.Application\Stock3D.Application.csproj", "{D9083A38-5912-4A9A-873B-01635D014119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.Persistence", "Stock3D.Persistence\Stock3D.Persistence.csproj", "{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.WebApi", "Stock3D.WebApi\Stock3D.WebApi.csproj", "{67A9972D-0380-4A4C-8435-C259FD6F1D76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28EA09EE-E839-48B6-802E-03BDD49BABAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28EA09EE-E839-48B6-802E-03BDD49BABAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28EA09EE-E839-48B6-802E-03BDD49BABAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28EA09EE-E839-48B6-802E-03BDD49BABAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9083A38-5912-4A9A-873B-01635D014119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9083A38-5912-4A9A-873B-01635D014119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9083A38-5912-4A9A-873B-01635D014119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9083A38-5912-4A9A-873B-01635D014119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A9972D-0380-4A4C-8435-C259FD6F1D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A9972D-0380-4A4C-8435-C259FD6F1D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A9972D-0380-4A4C-8435-C259FD6F1D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A9972D-0380-4A4C-8435-C259FD6F1D76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28EA09EE-E839-48B6-802E-03BDD49BABAF} = {CE3AE0B5-FC95-42C5-BDB2-78BBDBE10125}
+		{D9083A38-5912-4A9A-873B-01635D014119} = {CE3AE0B5-FC95-42C5-BDB2-78BBDBE10125}
+		{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5} = {541BF092-716E-4DBF-8DEA-AF62564E0771}
+		{67A9972D-0380-4A4C-8435-C259FD6F1D76} = {CB89739A-43D1-4733-BBB6-6A8E162AC532}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D8375EF-82BC-4669-8638-1B01CFF95A9A}
+	EndGlobalSection
+EndGlobal
