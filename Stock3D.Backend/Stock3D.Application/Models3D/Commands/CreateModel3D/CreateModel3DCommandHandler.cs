@@ -3,6 +3,7 @@ using Stock3D.Application.Interfaces;
 using Stock3D.Domain;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,10 @@ namespace Stock3D.Application.Models3D.Commands.CreateModel3D
         UserId = request.UserId,
         Title = request.Title,
         Details = request.Details,
+        Category = request.Category,
+        Price = request.Price,
+        FileFormat = null,
+        FilePath = null,
         Id = Guid.NewGuid(),
         UploadDate = DateTime.UtcNow,
       };

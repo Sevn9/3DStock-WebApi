@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using Stock3D.Application.Common.Mappings;
-using Stock3D.Application.Models3D.Commands.UpdateModel3D;
+using Stock3D.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stock3D.WebApi.Models
+namespace Stock3D.Application.Models3D.Queries.GetModel3DSearchResultList
 {
-  public class UpdateModel3DDto : IMapWith<UpdateModel3DCommand>
+  public class Model3DSearchDto : IMapWith<Model3D>
   {
     public Guid Id { get; set; }
     public string Title { get; set; }
@@ -19,11 +19,11 @@ namespace Stock3D.WebApi.Models
 
     public void Mapping(Profile profile)
     {
-      profile.CreateMap<UpdateModel3DDto, UpdateModel3DCommand>()
-        .ForMember(model3DCommand => model3DCommand.Id,
-        opt => opt.MapFrom(model3DCommand => model3DCommand.Id))
-        .ForMember(model3DCommand => model3DCommand.Title,
-        opt => opt.MapFrom(model3DCommand => model3DCommand.Title))
+      profile.CreateMap<Model3D, Model3DSearchDto>()
+        .ForMember(model3DDto => model3DDto.Id,
+        opt => opt.MapFrom(model3DDto => model3DDto.Id))
+        .ForMember(model3DDto => model3DDto.Title,
+        opt => opt.MapFrom(model3DDto => model3DDto.Title))
         .ForMember(model3DCommand => model3DCommand.Details,
         opt => opt.MapFrom(model3DCommand => model3DCommand.Details))
         .ForMember(model3DCommand => model3DCommand.Category,

@@ -10,6 +10,12 @@ namespace Stock3D.Domain
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string Details { get; set; }
+
+    public string? Category { get; set; }
+
+    public string? FileFormat { get; set; }
+    public string? Price { get; set; }
+
     public DateTime? UploadDate { get; set; }
 
     public string? FilePath { get; set; }
