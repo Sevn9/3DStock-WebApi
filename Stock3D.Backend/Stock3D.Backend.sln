@@ -9,13 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{CB89739A-43D1-4733-BBB6-6A8E162AC532}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.Domain", "Stock3D.Domain\Stock3D.Domain.csproj", "{28EA09EE-E839-48B6-802E-03BDD49BABAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stock3D.Domain", "Stock3D.Domain\Stock3D.Domain.csproj", "{28EA09EE-E839-48B6-802E-03BDD49BABAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.Application", "Stock3D.Application\Stock3D.Application.csproj", "{D9083A38-5912-4A9A-873B-01635D014119}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stock3D.Application", "Stock3D.Application\Stock3D.Application.csproj", "{D9083A38-5912-4A9A-873B-01635D014119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.Persistence", "Stock3D.Persistence\Stock3D.Persistence.csproj", "{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stock3D.Persistence", "Stock3D.Persistence\Stock3D.Persistence.csproj", "{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.WebApi", "Stock3D.WebApi\Stock3D.WebApi.csproj", "{67A9972D-0380-4A4C-8435-C259FD6F1D76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stock3D.WebApi", "Stock3D.WebApi\Stock3D.WebApi.csproj", "{67A9972D-0380-4A4C-8435-C259FD6F1D76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock3D.CloudStorage", "Stock3D.CloudStorage\Stock3D.CloudStorage.csproj", "{D4EB4802-E94C-4529-A552-1816AFE52528}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{67A9972D-0380-4A4C-8435-C259FD6F1D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A9972D-0380-4A4C-8435-C259FD6F1D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A9972D-0380-4A4C-8435-C259FD6F1D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4EB4802-E94C-4529-A552-1816AFE52528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4EB4802-E94C-4529-A552-1816AFE52528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4EB4802-E94C-4529-A552-1816AFE52528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4EB4802-E94C-4529-A552-1816AFE52528}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{D9083A38-5912-4A9A-873B-01635D014119} = {CE3AE0B5-FC95-42C5-BDB2-78BBDBE10125}
 		{AB940FBB-ECCC-4B91-B4FA-82FF86A70DB5} = {541BF092-716E-4DBF-8DEA-AF62564E0771}
 		{67A9972D-0380-4A4C-8435-C259FD6F1D76} = {CB89739A-43D1-4733-BBB6-6A8E162AC532}
+		{D4EB4802-E94C-4529-A552-1816AFE52528} = {541BF092-716E-4DBF-8DEA-AF62564E0771}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D8375EF-82BC-4669-8638-1B01CFF95A9A}

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Stock3D.Application.Models3D.Commands.CreateModel3D
 {
   //обработчик создания команды, указываем тип запроса и тип ответа.
-  //CreateModel3DCommand - это что необходимо для создания заметки, 
+  //CreateModel3DCommand - это что необходимо для создания модели, 
   // CreateModel3DCommandHandler - содержит в себе логику создания
   public class CreateModel3DCommandHandler: IRequestHandler<CreateModel3DCommand, Guid>
   {
@@ -29,7 +29,7 @@ namespace Stock3D.Application.Models3D.Commands.CreateModel3D
         Title = request.Title,
         Details = request.Details,
         Id = Guid.NewGuid(),
-        UploadDate = DateTime.Now,
+        UploadDate = DateTime.UtcNow,
       };
       // добавление созданной модели в контекст, а затем сохранение изменений в базу
       await _dbContext.Models3D.AddAsync(model3D, cancellationToken);
