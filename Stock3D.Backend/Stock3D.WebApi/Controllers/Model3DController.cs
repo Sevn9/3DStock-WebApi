@@ -40,13 +40,15 @@ namespace Stock3D.WebApi.Controllers
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<Model3DListVm>> GetAll()
+    public async Task<ActionResult<Model3DListVm>> GetAll([FromQuery] PageParameters pageParameters)
     {
       //сформируем запрос и с помощью медиатора отправим его
       // полученный результат вернем клиенту
       var query = new GetModel3DListQuery
       {
         UserId = UserId,
+        PageNumber = pageParameters.PageNumber,
+        PageSize = pageParameters.PageSize,
 
       };
       var vm = await Mediator.Send(query);

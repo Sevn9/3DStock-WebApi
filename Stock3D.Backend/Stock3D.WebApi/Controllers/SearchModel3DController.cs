@@ -23,7 +23,7 @@ namespace Stock3D.WebApi.Controllers
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<Model3DResultListVm>> Search(string searchString)
+    public async Task<ActionResult<Model3DResultListVm>> Search(string? searchString)
     {
       var query = new GetModel3DSearchResultListQuery
       {

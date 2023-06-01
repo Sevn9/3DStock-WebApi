@@ -11,5 +11,10 @@ namespace Stock3D.Application.Models3D.Queries.GetModel3DList
   {
     public Guid UserId { get; set; }
 
+    public int PageNumber { get; set; }
+
+    public int PageSize { get; set; }
+
+
   }
 }
