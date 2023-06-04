@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Stock3D.Application.Models3D.Queries.GetModel3DDetails;
 using Stock3D.Application.Models3D.Queries.GetModel3DList;
 using Stock3D.Application.Models3D.Queries.GetModel3DSearchResultList;
+using Stock3D.WebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,14 @@ namespace Stock3D.WebApi.Controllers
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<Model3DResultListVm>> Search(string? searchString)
+    public async Task<ActionResult<Model3DResultListVm>> Search(string? searchString, [FromQuery] PageParameters pageParameters)
     {
       var query = new GetModel3DSearchResultListQuery
       {
         UserId = UserId,
-        SearchString = searchString
+        SearchString = searchString,
+        PageNumber = pageParameters.PageNumber,
+        PageSize = pageParameters.PageSize,
       };
       var vm = await Mediator.Send(query);
       return Ok(vm);

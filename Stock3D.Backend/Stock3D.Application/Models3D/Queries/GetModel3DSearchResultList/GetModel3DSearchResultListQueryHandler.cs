@@ -36,6 +36,8 @@ namespace Stock3D.Application.Models3D.Queries.GetModel3DSearchResultList
         .Where(model3D => model3D.UserId == request.UserId && (model3D.Title.ToLower().Contains(request.SearchString.ToLower())
         || model3D.Category.ToLower().Contains(request.SearchString.ToLower())
         || model3D.Details.ToLower().Contains(request.SearchString.ToLower())))
+        .Skip((request.PageNumber - 1) * request.PageSize)
+        .Take(request.PageSize)
         .ProjectTo<Model3DSearchDto>(_mapper.ConfigurationProvider)
         .ToListAsync(cancellationToken);
 
@@ -45,6 +47,8 @@ namespace Stock3D.Application.Models3D.Queries.GetModel3DSearchResultList
       {
         var models3DQuery = await _dbContext.Models3D
           .Where(model3D => model3D.UserId == request.UserId)
+          .Skip((request.PageNumber - 1) * request.PageSize)
+          .Take(request.PageSize)
           .ProjectTo<Model3DSearchDto>(_mapper.ConfigurationProvider)
           .ToListAsync(cancellationToken);
 
