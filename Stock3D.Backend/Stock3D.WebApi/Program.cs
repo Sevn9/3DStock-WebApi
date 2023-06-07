@@ -12,14 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 RegisterServices(builder.Services);
 
 var app = builder.Build();
-//var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-//Configure(app, provider);
 Configure(app);
 
 app.MapGet("/test", () => "Hello World!");
-
-//var t = builder.Configuration;
 
 app.Run();
 
@@ -35,27 +31,11 @@ void RegisterServices(IServiceCollection services)
   services.AddApplication();
   services.AddPersistence(builder.Configuration);
 
-  //
   services.AddSingleton<CloudStorageAuth>();
-
   services.AddSingleton<CloudSettings>();
-
-  /*
-  var cloudSettings = new CloudSettings
-  {
-    BucketName = configuration.GetValue<string>("Bucket"),
-    AccessKeyId = configuration.GetValue<string>("Aws_access_key_id"),
-    SecretAccessKey = configuration.GetValue<string>("Aws_secret_access_key"),
-    Region = configuration.GetValue<string>("Region"),
-    ServiceURL = configuration.GetValue<string>("ServiceURL")
-  };
-  */
- // services.AddSingleton(cloudSettings);
-
   
   services.AddControllers();
 
-  //для безопасности
   services.AddCors(options =>
   {
     options.AddPolicy("AllowAll", policy =>
@@ -75,14 +55,9 @@ void RegisterServices(IServiceCollection services)
     .AddJwtBearer("Bearer", option =>
     {
       option.Authority = "https://localhost:44358/";
-      option.Audience = "NotesWebAPI";
+      option.Audience = "Stock3DWebAPI";
       option.RequireHttpsMetadata = false;
     });
-
-  services.AddVersionedApiExplorer(options =>
-  options.GroupNameFormat = "'v'VVV");
-  services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
-    ConfigureSwaggerOptions>();
 
   */
   services.AddSwaggerGen(config =>
@@ -95,9 +70,8 @@ void RegisterServices(IServiceCollection services)
 
 }
 //настройка пайплайна(конвейера) указываем что будет использовать приложение здесь
-//сюда же подключается мидлваре
+//сюда же подключается middleware
 
-//void Configure(WebApplication app, IApiVersionDescriptionProvider provider)
 void Configure(WebApplication app)
 {
   if (app.Environment.IsDevelopment())
@@ -113,20 +87,6 @@ void Configure(WebApplication app)
     }
     );
   /*
-  
-  app.UseSwaggerUI(config =>
-  {
-    foreach (var description in provider.ApiVersionDescriptions)
-    {
-      config.SwaggerEndpoint(
-        $"/swagger/{description.GroupName}/swagger.json",
-        description.GroupName.ToUpperInvariant());
-      config.RoutePrefix = string.Empty;
-
-    }
-
-    //config.SwaggerEndpoint("swagger/v1/swagger.json", "Notes API");
-  });
   //интегрируем кастомный мидлваре в пайплайн
   app.UseCustomExceptionHandler();
   */
@@ -143,10 +103,9 @@ void Configure(WebApplication app)
   app.UseHttpsRedirection();
   app.UseCors("AllowAll");
   /*
-  //добавим авторизацию и аутенфикацию
+  //добавим авторизацию и аутентификацию
   //app.UseAuthentication();
   //app.UseAuthorization();
-  //app.UseApiVersioning();
   */
 
   app.UseEndpoints(endpoints =>

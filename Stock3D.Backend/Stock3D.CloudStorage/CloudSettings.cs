@@ -1,20 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Stock3D.CloudStorage
 {
   public class CloudSettings
   {
-    IConfiguration _configuration;
     public CloudSettings(IConfiguration configuration) {
-      _configuration = configuration;
       BucketName = configuration["Bucket"];
-
       AccessKeyId = configuration["Aws_access_key_id"];
       SecretAccessKey = configuration["Aws_secret_access_key"];
       Region = configuration["Region"];

@@ -2,16 +2,9 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Stock3D.Application.Common.Exceptions;
 using Stock3D.Application.Interfaces;
-using Stock3D.Application.Models3D.Queries.GetModel3DList;
-using Stock3D.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace Stock3D.Application.Models3D.Queries.GetModel3DSearchResultList
 {

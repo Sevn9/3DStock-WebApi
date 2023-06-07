@@ -2,11 +2,8 @@
 using Stock3D.Application.Common.Mappings;
 using Stock3D.Application.Models3D.Commands.CreateModel3D;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Stock3D.WebApi.Models
 {

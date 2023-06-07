@@ -2,14 +2,9 @@
 using Amazon.S3.Model;
 using MediatR;
 using Stock3D.Application.Interfaces;
-using Stock3D.Application.Models3D.Commands.CreateModel3D;
 using Stock3D.CloudStorage;
 using Stock3D.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Stock3D.Application.Models3D.Commands.CreateModel3DWithFile
 {

@@ -7,11 +7,6 @@ using Stock3D.Application.Models3D.Queries.GetModel3DDetails;
 using Stock3D.Application.Models3D.Queries.GetModel3DList;
 using Stock3D.WebApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Amazon.S3.Util.S3EventNotification;
 
 namespace Stock3D.WebApi.Controllers
 {

@@ -97,7 +97,6 @@ namespace Stock3D.WebApi.Controllers
     /// }
     /// </remarks>
     /// <param name="createModelWithFile3DDto">createModel3DDto object</param>
-    /// <param name="file"></param>
     /// <returns>Returns id (guid)</returns>
     /// <response code="201">Created</response>
     /// <response code="401">If the user is unauthorized</response>
