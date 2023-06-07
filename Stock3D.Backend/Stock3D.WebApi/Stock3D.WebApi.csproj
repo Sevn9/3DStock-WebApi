@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Stock3D.Application\Stock3D.Application.csproj" />
+    <ProjectReference Include="..\Stock3D.CloudStorage\Stock3D.CloudStorage.csproj" />
     <ProjectReference Include="..\Stock3D.Persistence\Stock3D.Persistence.csproj" />
   </ItemGroup>
 

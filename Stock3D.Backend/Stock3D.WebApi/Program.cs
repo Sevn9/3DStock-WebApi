@@ -1,7 +1,9 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Stock3D.Application;
 using Stock3D.Application.Common.Mappings;
 using Stock3D.Application.Interfaces;
+using Stock3D.CloudStorage;
 using Stock3D.Persistence;
 using System.Reflection;
 
@@ -17,6 +19,8 @@ Configure(app);
 
 app.MapGet("/test", () => "Hello World!");
 
+//var t = builder.Configuration;
+
 app.Run();
 
 void RegisterServices(IServiceCollection services)
@@ -31,6 +35,24 @@ void RegisterServices(IServiceCollection services)
   services.AddApplication();
   services.AddPersistence(builder.Configuration);
 
+  //
+  services.AddSingleton<CloudStorageAuth>();
+
+  services.AddSingleton<CloudSettings>();
+
+  /*
+  var cloudSettings = new CloudSettings
+  {
+    BucketName = configuration.GetValue<string>("Bucket"),
+    AccessKeyId = configuration.GetValue<string>("Aws_access_key_id"),
+    SecretAccessKey = configuration.GetValue<string>("Aws_secret_access_key"),
+    Region = configuration.GetValue<string>("Region"),
+    ServiceURL = configuration.GetValue<string>("ServiceURL")
+  };
+  */
+ // services.AddSingleton(cloudSettings);
+
+  
   services.AddControllers();
 
   //для безопасности
