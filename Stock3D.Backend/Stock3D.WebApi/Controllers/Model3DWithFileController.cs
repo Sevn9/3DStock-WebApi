@@ -4,6 +4,7 @@ using Stock3D.Application.Models3D.Commands.CreateModel3D;
 using Stock3D.Application.Models3D.Commands.CreateModel3DWithFile;
 using Stock3D.Application.Models3D.Commands.DeleteModel3D;
 using Stock3D.Application.Models3D.Commands.UpdateModel3D;
+using Stock3D.Application.Models3D.Commands.UpdateModel3DWithFile;
 using Stock3D.Application.Models3D.Queries.GetModel3DDetails;
 using Stock3D.Application.Models3D.Queries.GetModel3DList;
 using Stock3D.WebApi.Models;
@@ -103,6 +104,9 @@ namespace Stock3D.WebApi.Controllers
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [DisableRequestSizeLimit,
+    RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue,
+        ValueLengthLimit = int.MaxValue)]
     [Consumes("multipart/form-data")]
     public async Task<ActionResult<Guid>> Create([FromForm] CreateModel3DWithFileDto createModelWithFile3DDto)
     {
@@ -127,16 +131,20 @@ namespace Stock3D.WebApi.Controllers
     ///     price: "string"
     /// }
     /// </remarks>
-    /// <param name="updateModel3DDto">updateModel3DDto object</param>
+    /// <param name="updateModel3DWithFileDto">updateModel3DWithFileDto object</param>
     /// <returns>Returns NoContent</returns>
     /// <response code="204">Success</response>
     /// <response code="401">If the user is unauthorized</response>
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<Guid>> Update([FromBody] UpdateModel3DDto updateModel3DDto)
+    [DisableRequestSizeLimit,
+    RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue,
+        ValueLengthLimit = int.MaxValue)]
+    [Consumes("multipart/form-data")]
+    public async Task<ActionResult<Guid>> Update([FromBody] UpdateModel3DWithFileDto updateModel3DWithFileDto)
     {
-      var command = _mapper.Map<UpdateModel3DCommand>(updateModel3DDto);
+      var command = _mapper.Map<UpdateModel3DWithFileCommand>(updateModel3DWithFileDto);
       command.UserId = UserId;
       await Mediator.Send(command);
       return NoContent();

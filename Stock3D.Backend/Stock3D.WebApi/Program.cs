@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Stock3D.Application;
@@ -27,7 +28,7 @@ void RegisterServices(IServiceCollection services)
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
     config.AddProfile(new AssemblyMappingProfile(typeof(IStock3DDbContext).Assembly));
   });
-  
+
   services.AddApplication();
   services.AddPersistence(builder.Configuration);
 

@@ -13,6 +13,12 @@ namespace Stock3D.Application.Models3D.Queries.GetModel3DSearchResultList
     public string? Category { get; set; }
     public string? Price { get; set; }
 
+    public string? FileFormat { get; set; }
+
+    public DateTime? UploadDate { get; set; }
+
+    public string? FilePath { get; set; }
+
     public void Mapping(Profile profile)
     {
       profile.CreateMap<Model3D, Model3DSearchDto>()
@@ -25,7 +31,13 @@ namespace Stock3D.Application.Models3D.Queries.GetModel3DSearchResultList
         .ForMember(model3DCommand => model3DCommand.Category,
         opt => opt.MapFrom(model3DCommand => model3DCommand.Category))
         .ForMember(model3DCommand => model3DCommand.Price,
-        opt => opt.MapFrom(model3DCommand => model3DCommand.Price));
+        opt => opt.MapFrom(model3DCommand => model3DCommand.Price))
+        .ForMember(model3DCommand => model3DCommand.FileFormat,
+        opt => opt.MapFrom(model3DCommand => model3DCommand.FileFormat))
+        .ForMember(model3DCommand => model3DCommand.UploadDate,
+        opt => opt.MapFrom(model3DCommand => model3DCommand.UploadDate))
+        .ForMember(model3DCommand => model3DCommand.FilePath,
+        opt => opt.MapFrom(model3DCommand => model3DCommand.FilePath));
     }
 
   }

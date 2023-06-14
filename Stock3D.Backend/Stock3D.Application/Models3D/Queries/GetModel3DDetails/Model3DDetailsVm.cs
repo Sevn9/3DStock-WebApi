@@ -6,6 +6,8 @@ using System;
 
 namespace Stock3D.Application.Models3D.Queries.GetModel3DDetails
 {
+  //Model3DDetailsVm это вью модель, класс который описывает то что будет возвращаться пользователю,
+  //когда он будет запрашивать детали заметки
   public class Model3DDetailsVm : IMapWith<Model3D>
   {
     //id самой модели

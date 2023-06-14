@@ -11,15 +11,12 @@ namespace Stock3D.CloudStorage
     private readonly CloudSettings _cloudSettings;
     public CloudStorageAuth(CloudSettings cloudSettings)
     {
-      //проверить
       _cloudSettings = cloudSettings;
     }
    
 
     public ClientData GetClientData()
     {
-      //var settings = LoadSettings();
-
       return new ClientData()
       {
         Client = new AmazonS3Client(
@@ -34,19 +31,5 @@ namespace Stock3D.CloudStorage
         CloudSettings = _cloudSettings
       };
     }
-    /*
-    private static CloudSettings LoadSettings()
-    {
-      var settings = new CloudSettings()
-      {
-        BucketName = _cloudSettings["Bucket"],
-        AccessKeyId = _configuration["Aws_access_key_id"],
-        SecretAccessKey = _configuration["Aws_secret_access_key"],
-        Region = _configuration["Region"],
-        ServiceURL = _configuration["ServiceURL"]
-      };
-      return settings;
-    }
-    */
   }
 }

@@ -33,6 +33,7 @@ namespace Stock3D.Application.Models3D.Commands.CreateModel3DWithFile
         InputStream = request.File.OpenReadStream(),
 
       };
+      //кладем объект в хранилище
       var response = await data.Client.PutObjectAsync(objectRequest);
 
       //получаем ссылку на загруженный объект
@@ -45,15 +46,18 @@ namespace Stock3D.Application.Models3D.Commands.CreateModel3DWithFile
       };
 
       string url = data.Client.GetPreSignedURL(preSignedUrlRequest);
-
+      string fileFormat = Path.GetExtension(request.File.FileName);
       //формируем модель из нашего запроса и возвращаем id созданной модели
       var model3D = new Model3D
       {
+        Id = Guid.NewGuid(),
         UserId = request.UserId,
         Title = request.Title,
         Details = request.Details,
+        Category = request.Category,
+        FileFormat= fileFormat,
+        Price= request.Price,
         FilePath = url,
-        Id = Guid.NewGuid(),
         UploadDate = DateTime.UtcNow,
       };
 
