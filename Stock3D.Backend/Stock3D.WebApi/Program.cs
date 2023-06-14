@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Stock3D.Application;
 using Stock3D.Application.Common.Mappings;
 using Stock3D.Application.Interfaces;
+using Stock3D.CloudStorage;
 using Stock3D.Persistence;
 using System.Reflection;
 
@@ -13,6 +16,8 @@ var app = builder.Build();
 
 Configure(app);
 
+app.MapGet("/test", () => "Hello World!");
+
 app.Run();
 
 void RegisterServices(IServiceCollection services)
@@ -23,13 +28,15 @@ void RegisterServices(IServiceCollection services)
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
     config.AddProfile(new AssemblyMappingProfile(typeof(IStock3DDbContext).Assembly));
   });
-  
+
   services.AddApplication();
   services.AddPersistence(builder.Configuration);
 
+  services.AddSingleton<CloudStorageAuth>();
+  services.AddSingleton<CloudSettings>();
+  
   services.AddControllers();
 
-  //для безопасности
   services.AddCors(options =>
   {
     options.AddPolicy("AllowAll", policy =>
@@ -39,7 +46,21 @@ void RegisterServices(IServiceCollection services)
       policy.AllowAnyOrigin();
     });
   });
- 
+  /*
+  services.AddAuthentication(config =>
+  {
+    //схема по умолчанию для аутенфикации
+    //config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    //config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+  })
+    .AddJwtBearer("Bearer", option =>
+    {
+      option.Authority = "https://localhost:44358/";
+      option.Audience = "Stock3DWebAPI";
+      option.RequireHttpsMetadata = false;
+    });
+
+  */
   services.AddSwaggerGen(config =>
   {
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -50,8 +71,7 @@ void RegisterServices(IServiceCollection services)
 
 }
 //настройка пайплайна(конвейера) указываем что будет использовать приложение здесь
-//сюда же подключается мидлваре
-
+//сюда же подключается middleware
 
 void Configure(WebApplication app)
 {
@@ -67,7 +87,10 @@ void Configure(WebApplication app)
       config.SwaggerEndpoint("swagger/v1/swagger.json", "Stock3D API");
     }
     );
-  
+  /*
+  //интегрируем кастомный мидлваре в пайплайн
+  app.UseCustomExceptionHandler();
+  */
   using var scope = app.Services.CreateScope();
   //вызываем метод инициализации базы здесь
   var serviceProvider = scope.ServiceProvider;
@@ -80,7 +103,11 @@ void Configure(WebApplication app)
   app.UseRouting();
   app.UseHttpsRedirection();
   app.UseCors("AllowAll");
-
+  /*
+  //добавим авторизацию и аутентификацию
+  //app.UseAuthentication();
+  //app.UseAuthorization();
+  */
 
   app.UseEndpoints(endpoints =>
   {

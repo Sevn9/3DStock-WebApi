@@ -3,10 +3,6 @@ using Stock3D.Application.Interfaces;
 using Stock3D.Domain;
 using Stock3D.Persistence.EntityTypeConfiguration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Stock3D.Persistence
 {

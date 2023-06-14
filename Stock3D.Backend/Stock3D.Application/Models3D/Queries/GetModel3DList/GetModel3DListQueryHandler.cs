@@ -20,9 +20,11 @@ namespace Stock3D.Application.Models3D.Queries.GetModel3DList
     public async Task<Model3DListVm> Handle(GetModel3DListQuery request, CancellationToken cancellationToken)
     {
       //ProjectTo метод расширения библиотеки автомапер который проецирует нашу коллекцию
-      // в соответствие в заданной конфигурации
+      // в соответствие c заданной конфигурацией
       var models3DQuery = await _dbContext.Models3D
         .Where(model3D => model3D.UserId == request.UserId)
+        .Skip((request.PageNumber - 1) * request.PageSize)
+        .Take(request.PageSize)
         .ProjectTo<Model3DLookupDto>(_mapper.ConfigurationProvider)
         .ToListAsync(cancellationToken);
 

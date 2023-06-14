@@ -1,0 +1,74 @@
+﻿@model RegisterViewModel
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Signup Form </title>
+  <!-- CSS -->
+  <link href=@Url.Content("~/styles/style.css") rel="stylesheet" type="text/css" />
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<form asp-controller="Auth" asp-action="Register" method="post">
+  <body>
+    <input type="hidden" asp-for="ReturnUrl" />
+    <section class="container forms">
+      <!-- Signup Form -->
+      <div class="form signup">
+        <div class="form-content">
+          <header>Регистрация</header>
+          <form action="#">
+            <div class="field input-field">
+              <input asp-for="Username" type="email" placeholder="Логин" class="input">
+              <span asp-validation-for="Username"></span>
+            </div>
+            <div class="field input-field">
+              <input asp-for="Password" type="password" placeholder="Создать пароль" class="password">
+              <span asp-validation-for="Password"></span>
+            </div>
+            <div class="field input-field">
+              <input asp-for="ConfirmPassword" type="password" placeholder="Подтвердить пароль" class="password">
+              <span asp-validation-for="ConfirmPassword"></span>
+              <i class='bx bx-hide eye-icon'></i>
+            </div>
+            <div class="field button-field">
+              <button type ="submit">Зарегистрироваться</button>
+            </div>
+          </form>
+          <div class="form-link">
+            <span>Уже есть аккаунт? <a asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="link login-link">Вход</a></span>
+          </div>
+        </div>
+      </div>
+
+
+
+    </section>
+    <!-- JavaScript -->
+    <script>
+      const forms = document.querySelector(".forms"),
+          pwShowHide = document.querySelectorAll(".eye-icon"),
+          links = document.querySelectorAll(".link");
+
+      pwShowHide.forEach(eyeIcon => {
+          eyeIcon.addEventListener("click", () => {
+              let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
+
+              pwFields.forEach(password => {
+                  if (password.type === "password") {
+                      password.type = "text";
+                      eyeIcon.classList.replace("bx-hide", "bx-show");
+                      return;
+                  }
+                  password.type = "password";
+                  eyeIcon.classList.replace("bx-show", "bx-hide");
+              })
+
+          })
+      })
+
+
+    </script>
+  </body>
+</form>

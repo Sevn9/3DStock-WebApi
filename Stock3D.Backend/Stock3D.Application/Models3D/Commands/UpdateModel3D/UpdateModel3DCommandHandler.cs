@@ -31,7 +31,9 @@ namespace Stock3D.Application.Models3D.Commands.UpdateModel3D
 
       entity.Details = request.Details;
       entity.Title = request.Title;
-      entity.UploadDate = DateTime.Now;
+      entity.UploadDate = DateTime.UtcNow;
+      entity.Price = request.Price;
+      entity.Category = request.Category;
 
       await _dbContext.SaveChangesAsync(cancellationToken);
 

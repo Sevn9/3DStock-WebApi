@@ -7,10 +7,6 @@ using Stock3D.Application.Models3D.Queries.GetModel3DDetails;
 using Stock3D.Application.Models3D.Queries.GetModel3DList;
 using Stock3D.WebApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Stock3D.WebApi.Controllers
 {
@@ -39,13 +35,15 @@ namespace Stock3D.WebApi.Controllers
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<Model3DListVm>> GetAll()
+    public async Task<ActionResult<Model3DListVm>> GetAll([FromQuery] PageParameters pageParameters)
     {
       //сформируем запрос и с помощью медиатора отправим его
       // полученный результат вернем клиенту
       var query = new GetModel3DListQuery
       {
         UserId = UserId,
+        PageNumber = pageParameters.PageNumber,
+        PageSize = pageParameters.PageSize,
 
       };
       var vm = await Mediator.Send(query);
@@ -88,12 +86,14 @@ namespace Stock3D.WebApi.Controllers
     /// POST /model3d
     /// {
     ///     title: "model3d title",
-    ///     details: "model3d details"
+    ///     details: "model3d details",
+    ///     category: "string",
+    ///     price: "string"
     /// }
     /// </remarks>
     /// <param name="createModel3DDto">createModel3DDto object</param>
     /// <returns>Returns id (guid)</returns>
-    /// <response code="201">Success</response>
+    /// <response code="201">Created</response>
     /// <response code="401">If the user is unauthorized</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -104,12 +104,10 @@ namespace Stock3D.WebApi.Controllers
       var command = _mapper.Map<CreateModel3DCommand>(createModel3DDto);
       command.UserId = UserId;
       var model3DId = await Mediator.Send(command);
-      //по хорошему использовать Created()
-      return Ok(model3DId);
+      return CreatedAtAction(nameof(Get), new { id = model3DId }, model3DId);
 
     }
     //update для обновления информации о 3D модели
-
     /// <summary>
     /// Updates the 3D model object
     /// </summary>
@@ -118,6 +116,9 @@ namespace Stock3D.WebApi.Controllers
     /// PUT /model3d
     /// {
     ///     title: "updated 3D model title"
+    ///     details: "model3d details",
+    ///     category: "string",
+    ///     price: "string"
     /// }
     /// </remarks>
     /// <param name="updateModel3DDto">updateModel3DDto object</param>
@@ -136,7 +137,6 @@ namespace Stock3D.WebApi.Controllers
 
     }
     //delete для удаления 3D модели
-
     /// <summary>
     /// Delete the 3D model by id
     /// </summary>
@@ -163,5 +163,7 @@ namespace Stock3D.WebApi.Controllers
       return NoContent();
 
     }
+
+    
   }
 }
