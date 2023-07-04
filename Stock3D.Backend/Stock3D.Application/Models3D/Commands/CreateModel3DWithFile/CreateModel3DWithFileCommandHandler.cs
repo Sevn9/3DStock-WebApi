@@ -25,28 +25,34 @@ namespace Stock3D.Application.Models3D.Commands.CreateModel3DWithFile
     //логика обработки команд находится в handle
     public async Task<Guid> Handle(CreateModel3DWithFileCommand request, CancellationToken cancellationToken)
     {
-      //создаем запрос к облачному хранилищу
-      var objectRequest = new PutObjectRequest()
+      
+      //создаем запрос к облачному хранилищу для 3d объекта
+      var objectFileRequest = new PutObjectRequest()
       {
         BucketName = data.CloudSettings.BucketName,
-        Key = $"{request.UserId}/{request.File.FileName}",
+        Key = $"{request.UserId}/Object/{request.File.FileName}",
         InputStream = request.File.OpenReadStream(),
 
       };
-      //кладем объект в хранилище
-      var response = await data.Client.PutObjectAsync(objectRequest);
+      //кладем 3d объект в хранилище
+      var responseFileRequest = await data.Client.PutObjectAsync(objectFileRequest);
 
-      //получаем ссылку на загруженный объект
-      var preSignedUrlRequest = new GetPreSignedUrlRequest
+      string fileFullName = $"{request.UserId}/Object/{request.File.FileName}";
+      string fileUrl = $"{data.CloudSettings.ServiceURL}/{data.CloudSettings.BucketName}/{request.UserId}/Object/{request.File.FileName}";
+      string fileFormat = Path.GetExtension(request.File.FileName);
+      
+      //создаем запрос к облачному хранилищу для картинки
+      var objectImageRequest = new PutObjectRequest()
       {
         BucketName = data.CloudSettings.BucketName,
-        Key = $"{request.UserId}/{request.File.FileName}",
-        Verb = HttpVerb.PUT,
-        Expires = DateTime.UtcNow.AddSeconds(30),
-      };
+        Key = $"{request.UserId}/Image/{request.Image.FileName}",
+        InputStream = request.Image.OpenReadStream(),
 
-      string url = data.Client.GetPreSignedURL(preSignedUrlRequest);
-      string fileFormat = Path.GetExtension(request.File.FileName);
+      };
+      //кладем картинку в хранилище
+      var responseImageRequest = await data.Client.PutObjectAsync(objectImageRequest);
+
+      string ImageUrl = $"{data.CloudSettings.ServiceURL}/{data.CloudSettings.BucketName}/{request.UserId}/Image/{request.Image.FileName}";
       //формируем модель из нашего запроса и возвращаем id созданной модели
       var model3D = new Model3D
       {
@@ -57,8 +63,11 @@ namespace Stock3D.Application.Models3D.Commands.CreateModel3DWithFile
         Category = request.Category,
         FileFormat= fileFormat,
         Price= request.Price,
-        FilePath = url,
+        FilePath = fileUrl,
+        ImagePath = ImageUrl,
         UploadDate = DateTime.UtcNow,
+        FileFullName= fileFullName,
+
       };
 
       // добавление созданной модели в контекст, а затем сохранение изменений в базу

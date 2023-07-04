@@ -22,7 +22,8 @@ namespace Stock3D.WebApi.Models
 
     public string? Price { get; set; }
 
-    public IFormFile File { get; set; }
+    public IFormFile? File { get; set; }
+    public IFormFile Image { get; set; }
 
     public void Mapping(Profile profile)
     {
@@ -36,7 +37,9 @@ namespace Stock3D.WebApi.Models
                 .ForMember(model3DCommand => model3DCommand.Category,
                 opt => opt.MapFrom(model3DCommand => model3DCommand.Category))
                 .ForMember(model3DCommand => model3DCommand.Price,
-                opt => opt.MapFrom(model3DCommand => model3DCommand.Price));
+                opt => opt.MapFrom(model3DCommand => model3DCommand.Price))
+                .ForMember(model3DCommand => model3DCommand.Image,
+                opt => opt.MapFrom(model3DCommand => model3DCommand.Image));
                 
     }
 

@@ -19,5 +19,9 @@ namespace Stock3D.Domain
     public DateTime? UploadDate { get; set; }
 
     public string? FilePath { get; set; }
+
+    public string? FileFullName { get; set; }
+
+    public string? ImagePath { get; set; }
   }
 }

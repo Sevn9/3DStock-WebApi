@@ -16,9 +16,14 @@ namespace Stock3D.Application.Models3D.Commands.CreateModel3DWithFile
     public string? Price { get; set; }
 
     public IFormFile File { get; set; }
+
+    public IFormFile Image { get; set; }
     public DateTime? UploadDate { get; set; }
 
     public string? FilePath { get; set; }
+
+    public string? FileFullName { get; set; }
+    public string? ImagePath { get; set; }
 
   }
 }
